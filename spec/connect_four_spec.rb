@@ -52,10 +52,64 @@ describe Board do
 
   describe "#check_victory?" do
       
-      it "checks if there is victory" do
-        b.game_board = [["-","-","X","X","X","X"],["-","-","-","-","-","-"],["-","-","-","-","-","-"],["-","-","-","-","-","-"], ["-","-","-","-","-","-"],["-","-","-","-","-","-",],["-","-","-","-","-","-"]]
-        expect(b.check_victory?).to eq(true)
+    it "checks if there is victory (vertical)" do
+      b.game_board = [["-","-","X","X","X","X"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"], 
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
+      expect(b.check_victory?).to eq(true)
+    end
+
+    it "checks if there is victory (horizontal)" do
+      b.game_board = [["-","-","X","-","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","-","X","-","-","-"], 
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
+      expect(b.check_victory?).to eq(true)
+    end
+
+    it "checks if there is victory (diagonal)" do
+      b.game_board = [["-","-","-","-","-","-"],
+                      ["-","-","-","X","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","X","-","-","-","-"], 
+                      ["X","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
+      expect(b.check_victory?).to eq(true)
+    end
+
+  end
+
+
+  describe Human do
+    let(:b) { Board.new }
+    let(:new_b_arr) { 
+       [["X","-","-","-","-","-"],
+        ["-","-","-","-","-","-"],
+        ["-","-","-","-","-","-"],
+        ["-","-","-","-","-","-"], 
+        ["-","-","-","-","-","-"],
+        ["-","-","-","-","-","-"],
+        ["-","-","-","-","-","-"]]
+    }
+    let(:h) { Human.new("p1", "x", b) }
+
+    describe "#get_move" do
+      it "" do
+        h.stub(:gets).and_return(1)
+        h.get_move
+        
+        expect(b.game_board).to eq(new_b_arr)
       end
+
+    end
   end
 
 end
