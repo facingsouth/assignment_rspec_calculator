@@ -99,7 +99,7 @@ end
 
 
 class Board
-  attr_reader :game_board
+  attr_accessor :game_board
 
   def initialize
 
