@@ -1,6 +1,7 @@
 =begin
 Test ConnectFour class
-  - Make sure the play loop finishes a game
+  - Make sure the play loop finishes a game**
+
   -choose_game_type - gives us valid responses when 1 or 2 entered
   - create_players - gives computer or human
   - switch_player changes current player
@@ -15,7 +16,6 @@ Human class
 
 Ai class
   generate_move - finds empty spot to win game
-  
 =end
 
 require 'connect_four'
