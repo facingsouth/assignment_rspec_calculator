@@ -1,3 +1,16 @@
+=begin
+Test ConnectFour class
+  
+
+
+
+
+
+
+
+
+=end
+
 require 'connect_four'
 
 describe ConnectFour do
@@ -6,6 +19,66 @@ describe ConnectFour do
  #   it "starts the main loops" do
  #     expect(ConnectFour.new.play).to eq("Would you like to play (1)# against the computer or (2) against another player?")
  #   end
+  let(:game) { ConnectFour.new }
+
+  describe "#choose_game_type" do
+
+    it "Get the correct input and reject invalid inputs" do
+      
+      game.stub(:gets).and_return("5", "3", "0", "2")
+
+      expect(game.choose_game_type).to eq(2)
+    end
+
+  end
+
+  describe "#create_players" do
+
+    it "Initialize human player vs AI game with choice 1" do
+
+      game.create_players(1)
+
+      expect(game.player1).to be_a(Human)
+
+      expect(game.player2).to be_a(AI)
+
+    end
+
+    it "Initialize two human players game with choice 2" do
+
+      game.create_players(2)
+
+      expect(game.player1).to be_a(Human)
+
+      expect(game.player2).to be_a(Human)
+
+    end
+  end
+
+  describe "#switch_player" do
+
+    it "switch to player2 if current player is player1" do
+
+      game.current_player = game.player1
+
+      game.switch_player
+
+      expect(game.current_player).to eq(game.player2)
+
+    end
+
+    it "switch to player1 if current player is player2" do
+
+      game.current_player = game.player2
+
+      game.switch_player
+
+      expect(game.current_player).to eq(game.player1)
+
+    end
+
+  end
+
 end
 
 describe Board do
