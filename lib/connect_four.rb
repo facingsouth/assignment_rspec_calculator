@@ -47,7 +47,7 @@ class ConnectFour
 
     if choice == 1
       @player1 = Human.new("Player 1", "x", @board)
-      @player2 = AI.new("Player 2", "o", @board)
+      @player2 = AI.new("Computer", "o", @board)
     else
       @player1 = Human.new("Player 1", "x", @board)
       @player2 = Human.new("Player 2", "o", @board)
@@ -111,7 +111,10 @@ class Board
 
     puts
 
-    @game_board.transpose.each {|l| p l}
+    @game_board.transpose.each do |l| 
+      l.each {|e| print "#{e}  "}
+      puts
+    end
 
     puts
 
