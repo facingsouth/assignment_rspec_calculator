@@ -91,7 +91,7 @@ describe Board do
   describe Human do
     let(:b) { Board.new }
     let(:new_b_arr) { 
-       [["X","-","-","-","-","-"],
+       [["-","-","-","-","-","X"],
         ["-","-","-","-","-","-"],
         ["-","-","-","-","-","-"],
         ["-","-","-","-","-","-"], 
@@ -99,17 +99,48 @@ describe Board do
         ["-","-","-","-","-","-"],
         ["-","-","-","-","-","-"]]
     }
-    let(:h) { Human.new("p1", "x", b) }
+    let(:h) { Human.new("p1", "X", b) }
 
     describe "#get_move" do
-      it "" do
-        h.stub(:gets).and_return(1)
+      it "it adds piece to proper place" do
+        h.stub(:gets).and_return("1") 
+        h.get_move
+        
+        expect(b.game_board).to eq(new_b_arr)
+      end
+      
+    
+
+      it "it loops when improper place entered" do
+        h.stub(:gets).and_return("10","0","1") 
         h.get_move
         
         expect(b.game_board).to eq(new_b_arr)
       end
 
     end
+
+  end
+
+  describe AI do
+    let(:b) { Board.new }
+    let(:ai){AI.new("ai_board","O",b)}
+
+    describe "#generate_move" do
+      it "places piece in right position" do
+        
+        b.game_board = [["-","-","-","-","-","O"],
+                        ["-","-","-","-","-","X"],
+                        ["-","-","-","-","-","O"],
+                        ["-","-","-","-","-","-"], 
+                        ["-","-","-","-","-","O"],
+                        ["-","-","-","-","-","O"],
+                        ["-","X","X","O","O","X"]]
+                    
+        expect(ai.generate_move).to eq(4)
+      end
+    end
+  
   end
 
 end
