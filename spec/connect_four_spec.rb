@@ -101,44 +101,43 @@ describe Board do
     it "add the pieces" do
         column = 4
         piece = "X"
-      expect(b.add_piece(column,piece)).to eq(true)
-    end
-
-
-    it "add the pieces" do
-        column = 4
-        piece = "X"
-        b.game_board = Array.new(7) { %w(X X X X X X) }
+        game_board = Array.new(7) { %w(X X X X X X) }
+        board = Board.new(game_board)
       
-      expect(b.add_piece(column,piece)).to eq(nil )
+      expect(board.add_piece(column,piece)).to eq(nil )
     end
   end
   
   describe "#full?" do
 
     it "checks if full" do
-        b.game_board = Array.new(7) { %w(X X X X X X) }
+      game_board = Array.new(7) { %w(X X X X X X) }
+      board = Board.new(game_board)
       
-      expect(b.full?).to eq(true)
+      expect(board.full?).to eq(true)
     end
 
     it "checks if full" do
-      b.game_board = [["-","-","-","-","-","-"],
-                      ["-","X","-","X","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","-","-","X","-","-"], 
-                      ["-","-","-","-","X","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
+      game_board = [["-","-","-","-","-","-"],
+                    ["-","X","-","X","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","-","-","X","-","-"], 
+                    ["-","-","-","-","X","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+
+      board = Board.new(game_board)
       
-      expect(b.full?).to eq(false)
+      expect(board.full?).to eq(false)
     end
 
 
     it "checks if full" do
-        b.game_board = Array.new(7) { %w(- X - X - X) }
+      game_board = Array.new(7) { %w(- X - X - X) }
+
+      board = Board.new(game_board)
       
-      expect(b.full?).to eq(false)
+      expect(board.full?).to eq(false)
     end
 
   end
@@ -146,58 +145,67 @@ describe Board do
   describe "#check_victory?" do
       
     it "checks if there is victory (vertical)" do
-      b.game_board = [["-","-","X","X","X","X"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"], 
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
-      expect(b.check_victory?).to eq(true)
+      game_board = [["-","-","X","X","X","X"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"], 
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+
+      board = Board.new(game_board)
+
+      expect(board.check_victory?).to eq(true)
     end
 
     it "checks if there is victory (vertical)" do
-      b.game_board = [["-","-","X","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","-","X","-","-","-"], 
-                      ["-","-","X","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
-      expect(b.check_victory?).to eq(false)
+      game_board = [["-","-","X","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","-","X","-","-","-"], 
+                    ["-","-","X","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+      board = Board.new(game_board)
+      expect(board.check_victory?).to eq(false)
     end
 
     it "checks if there is victory (horizontal)" do
-      b.game_board = [["-","-","X","-","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","-","X","-","-","-"], 
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
-      expect(b.check_victory?).to eq(true)
+      game_board = [["-","-","X","-","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","-","X","-","-","-"], 
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+
+      board = Board.new(game_board)
+      expect(board.check_victory?).to eq(true)
     end
 
     it "checks if there is victory (diagonal)" do
-      b.game_board = [["-","-","-","-","-","-"],
-                      ["-","-","-","X","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","X","-","-","-","-"], 
-                      ["X","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
-      expect(b.check_victory?).to eq(true)
+      game_board = [["-","-","-","-","-","-"],
+                    ["-","-","-","X","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","X","-","-","-","-"], 
+                    ["X","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+
+      board = Board.new(game_board)
+      expect(board.check_victory?).to eq(true)
     end
 
     it "checks if there is victory (diagonal)" do
-      b.game_board = [["-","-","-","-","-","-"],
-                      ["-","X","-","X","-","-"],
-                      ["-","-","X","-","-","-"],
-                      ["-","-","-","X","-","-"], 
-                      ["-","-","-","-","X","-"],
-                      ["-","-","-","-","-","-"],
-                      ["-","-","-","-","-","-"]]
-      expect(b.check_victory?).to eq(true)
+      game_board = [["-","-","-","-","-","-"],
+                    ["-","X","-","X","-","-"],
+                    ["-","-","X","-","-","-"],
+                    ["-","-","-","X","-","-"], 
+                    ["-","-","-","-","X","-"],
+                    ["-","-","-","-","-","-"],
+                    ["-","-","-","-","-","-"]]
+      board = Board.new(game_board)
+      expect(board.check_victory?).to eq(true)
     end
 
   end
@@ -238,19 +246,19 @@ describe Board do
   end
 
   describe AI do
-    let(:b) { Board.new }
-    let(:ai){AI.new("ai_board","O",b)}
 
     describe "#generate_move" do
       it "places piece in right position" do
         
-        b.game_board = [["-","-","-","-","-","O"],
-                        ["-","-","-","-","-","X"],
-                        ["-","-","-","-","-","O"],
-                        ["-","-","-","-","-","-"], 
-                        ["-","-","-","-","-","O"],
-                        ["-","-","-","-","-","O"],
-                        ["-","X","X","O","O","X"]]
+        game_board = [["-","-","-","-","-","O"],
+                      ["-","-","-","-","-","X"],
+                      ["-","-","-","-","-","O"],
+                      ["-","-","-","-","-","-"], 
+                      ["-","-","-","-","-","O"],
+                      ["-","-","-","-","-","O"],
+                      ["-","X","X","O","O","X"]]
+        b = Board.new(game_board)
+        ai = AI.new("ai_board","O",b)
                     
         expect(ai.generate_move).to eq(4)
       end
