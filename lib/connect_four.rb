@@ -100,11 +100,12 @@ end
 
 
 class Board
-  attr_accessor :game_board
+  attr_reader  :game_board
 
-  def initialize
-
-    @game_board = Array.new(7) { %w(- - - - - -) }
+  def initialize(game_board = nil)
+    
+    @game_board = game_board
+    @game_board ||= Array.new(7) { %w(- - - - - -) }
 
   end
 

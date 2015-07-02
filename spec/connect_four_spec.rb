@@ -1,14 +1,21 @@
 =begin
 Test ConnectFour class
+  - Make sure the play loop finishes a game
+  -choose_game_type - gives us valid responses when 1 or 2 entered
+  - create_players - gives computer or human
+  - switch_player changes current player
+
+Board class
+  add_piece - enters piece on board
+  full - checks to see if board is full
+  check_victory - to see if there is a winning combo
   
+Human class
+ -get_move - takes a valid input to add to board
 
-
-
-
-
-
-
-
+Ai class
+  generate_move - finds empty spot to win game
+  
 =end
 
 require 'connect_four'
@@ -94,6 +101,13 @@ describe Board do
     it "add the pieces" do
         column = 4
         piece = "X"
+      expect(b.add_piece(column,piece)).to eq(true)
+    end
+
+
+    it "add the pieces" do
+        column = 4
+        piece = "X"
         b.game_board = Array.new(7) { %w(X X X X X X) }
       
       expect(b.add_piece(column,piece)).to eq(nil )
@@ -109,7 +123,13 @@ describe Board do
     end
 
     it "checks if full" do
-        b.game_board = Array.new(7) { %w(- X X X X X) }
+      b.game_board = [["-","-","-","-","-","-"],
+                      ["-","X","-","X","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","-","-","X","-","-"], 
+                      ["-","-","-","-","X","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
       
       expect(b.full?).to eq(false)
     end
@@ -136,6 +156,17 @@ describe Board do
       expect(b.check_victory?).to eq(true)
     end
 
+    it "checks if there is victory (vertical)" do
+      b.game_board = [["-","-","X","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","-","X","-","-","-"], 
+                      ["-","-","X","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
+      expect(b.check_victory?).to eq(false)
+    end
+
     it "checks if there is victory (horizontal)" do
       b.game_board = [["-","-","X","-","-","-"],
                       ["-","-","X","-","-","-"],
@@ -153,6 +184,17 @@ describe Board do
                       ["-","-","X","-","-","-"],
                       ["-","X","-","-","-","-"], 
                       ["X","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"],
+                      ["-","-","-","-","-","-"]]
+      expect(b.check_victory?).to eq(true)
+    end
+
+    it "checks if there is victory (diagonal)" do
+      b.game_board = [["-","-","-","-","-","-"],
+                      ["-","X","-","X","-","-"],
+                      ["-","-","X","-","-","-"],
+                      ["-","-","-","X","-","-"], 
+                      ["-","-","-","-","X","-"],
                       ["-","-","-","-","-","-"],
                       ["-","-","-","-","-","-"]]
       expect(b.check_victory?).to eq(true)
