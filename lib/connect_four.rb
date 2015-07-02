@@ -270,11 +270,16 @@ class Human < Player
 
   end
 
+  private 
+
+
   def ask_for_column
 
     gets.chomp.to_i
 
   end
+
+
 
   def format_valid?(column)
 
